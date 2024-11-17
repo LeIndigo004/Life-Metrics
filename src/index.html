@@ -3,10 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/main.css">
   <script type="module" src="./js/index.js"></script>
   <title>Life Metrics</title>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><button class="btn" id="showMoodFormBtn">Mood Form</button></li>
+      <li><button class="btn" id="showSavedDataBtn">Saved Data</button></li>
+    </ul>
+  </nav>
   <h1>Welcome to Life Metrics!</h1>
+  <mood-log-form></mood-log-form>
+  <saved-mood-data></saved-mood-data>
 </body>
 </html>
