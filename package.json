@@ -2,11 +2,16 @@
   "name": "life-metrics",
   "version": "1.0.0",
   "description": "Laboration 3 in 1dv610",
-  "main": "index.js",
+  "main": "src/js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
 }
