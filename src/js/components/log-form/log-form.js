@@ -1,8 +1,8 @@
 /**
- * The nickname-form web component module.
+ * The mood-log-form web component module.
  *
  * @author Leia Lindberg <ll224np@student.lnu.se>
- * @version 1.1.0
+ * @version 1.0.0
  */
 
 const template = document.createElement('template')
