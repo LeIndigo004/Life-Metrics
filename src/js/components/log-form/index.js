@@ -1,1 +1,1 @@
-import './log-form.js'
+import './mood-log-form.js'
