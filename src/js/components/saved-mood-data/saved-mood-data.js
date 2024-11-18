@@ -16,12 +16,12 @@ template.innerHTML = `
   }
  .mood {
       font-size: 20px;
-      color: #364A60;
+      color: #798665;
     }
 
  .date {
       font-size: 14px;
-      color: #8594A6;
+      color: #2F383A;
     }
 
     #deleteDataBtn {
@@ -33,6 +33,11 @@ template.innerHTML = `
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      background-color: #2F383A;
+     }
+
+     #deleteDataBtn:hover {
+      background-color: #7E9C92;
      }
     }
 </style>

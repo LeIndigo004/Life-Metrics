@@ -10,7 +10,7 @@ import '../components/saved-mood-data/index.js'
 import { MoodLogService } from "../services/moodLogService.js";
 import { DiagramModule } from 'diagram-module';
 import { DiagramController } from './diagramController.js';
-import { UIManager } from './userInterfaceManager.js'
+import { UserInterfaceManager } from './userInterfaceManager.js';
 
 export class MainController {
   #moodLogService
@@ -19,7 +19,7 @@ export class MainController {
 
   constructor () {
     this.#moodLogService = new MoodLogService()
-    this.#UIManager = new UIManager(document.querySelector('mood-log-form'), document.querySelector('saved-mood-data'))
+    this.#UIManager = new UserInterfaceManager(document.querySelector('mood-log-form'), document.querySelector('saved-mood-data'))
     this.#diagramController = new DiagramController(new DiagramModule('canvas-id'))
 
     this.#setupEventListeners()

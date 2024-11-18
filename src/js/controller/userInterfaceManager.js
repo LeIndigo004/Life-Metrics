@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 
-export class UIManager {
+export class UserInterfaceManager {
   #moodLogForm
   #savedMoodData
 

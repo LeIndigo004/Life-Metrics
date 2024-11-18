@@ -31,14 +31,10 @@ export class MoodLogService {
 
   #loadMoodData () {
     const moodData = localStorage.getItem('moodData')
-    this.#checkIfDataExist(moodData)
-    return JSON.parse(moodData)
-  }
-
-  #checkIfDataExist(moodData) {
     if (!moodData) {
       return []
     }
+    return JSON.parse(moodData)
   }
 
   #setMoodData (moodData) {

@@ -1,6 +1,8 @@
 body {
+  background-color: #B8C394;
   margin: 0 auto;
   text-align: center;
+  color: #2F383A;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -12,7 +14,7 @@ li {
 .btn {
   padding: 10px 20px;
   margin: 10px;
-  background-color: #4CAF50;
+  background-color: #798665;
   color: white;
   font-size: 16px;
   border: none;
@@ -21,5 +23,5 @@ li {
 }
 
 .btn:hover {
-  background-color: #45a049;
+  background-color: #95A677;
 }
