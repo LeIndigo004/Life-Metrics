@@ -16,6 +16,9 @@ export class MoodLogService {
   saveMoodData (mood) {
     const newMoodData = this.#createMoodData(mood)
     this.#moodData.push(newMoodData)
+    if (this.#moodData.length > 7) {
+      this.#moodData.shift()
+    }
     this.#setMoodData(this.#moodData)
   }
 
@@ -36,9 +39,11 @@ export class MoodLogService {
   }
 
   #createMoodData (mood) {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0] // Ger bara datumet
     return {
-      mood: mood, 
-      date: new Date().toISOString()
+      label: formattedDate,
+      value: mood
     }
   }
 

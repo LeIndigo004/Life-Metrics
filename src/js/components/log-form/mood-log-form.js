@@ -8,6 +8,11 @@
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
+  #container {
+  display: flex;
+  justify-content: center; /* Centrerar horisontellt */
+  align-items: center; /* Centrerar vertikalt om höjd är satt */
+}
 
   h2 {
     font-size: 24px;
@@ -18,8 +23,7 @@ template.innerHTML = `
   input {
     display: block;
     padding: 15px;
-    padding-right: 100px;
-    margin: 10px 0;
+    padding-right: 50px;
     border-radius: 10px;
     font-family:inherit;
     font-size: 16px;
@@ -35,7 +39,9 @@ template.innerHTML = `
 </style>
 <h2>How are you feeling today?</h2>
 <form id="logForm">
+<div id="container">
     <input type="number" id="mood" min="1" max="10" placeholder="Rate your mood (1-10)" required>
+    </div>
 </form>
 
 `

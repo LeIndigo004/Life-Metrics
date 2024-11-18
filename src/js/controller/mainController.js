@@ -8,6 +8,7 @@
 import '../components/log-form/index.js'
 import '../components/saved-mood-data/index.js'
 import { MoodLogService } from "../services/moodLogService.js";
+import { DiagramModule } from 'diagram-module';
 
 export class MainController {
   #moodLogService
@@ -15,9 +16,11 @@ export class MainController {
   #savedMoodData
   #savedDataButton
   #logMoodButton
+  #diagram
 
   constructor () {
     this.#moodLogService = new MoodLogService()
+    this.#diagram = new DiagramModule('canvas-id')
 
     this.#moodLogForm = document.querySelector('mood-log-form')
     this.#savedMoodData = document.querySelector('saved-mood-data')
@@ -42,6 +45,7 @@ export class MainController {
 
   createMoodLog (mood) {
     this.#moodLogService.saveMoodData(mood)
+    this.updateChart()
     this.displayMoods()
   }
 
@@ -49,6 +53,20 @@ export class MainController {
     this.#showMoodData()
     this.#hideMoodForm()
     this.#savedMoodData.displayMoodData(this.#moodLogService.getMoodData())
+    this.updateChart()
+  }
+
+  updateChart() {
+    this.#diagram.clear()
+    const moodData = this.#moodLogService.getMoodData();
+    const labels = {
+      yTitle: 'Mood Rating',
+      xTitle: 'Date',
+      maxValueForY: 10,
+      numOfYLabels: 10
+    }
+    this.#diagram.setSize(1200, 800)
+    this.#diagram.createLineChart(moodData, labels)
   }
 
   confirmAndDeleteAllMoodData() {

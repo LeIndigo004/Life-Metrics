@@ -14,5 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "diagram-module": "^1.0.2"
   }
 }

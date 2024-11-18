@@ -8,16 +8,34 @@
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
+
+  li {
+    list-style: none;
+    display: inline-block;
+    padding: 20px
+  }
  .mood {
       font-size: 20px;
       color: #364A60;
     }
 
-    .date {
+ .date {
       font-size: 14px;
       color: #8594A6;
     }
-  </style>
+
+    #deleteDataBtn {
+      padding: 10px 20px;
+  margin: 10px;
+  background-color: red;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+    }
+</style>
 
   <div>
     <h2>Saved Mood Data</h2>
@@ -70,8 +88,8 @@ customElements.define('saved-mood-data',
         moodText.classList.add('mood')
         dateText.classList.add('date')
 
-        moodText.textContent = `Mood: ${element.mood}`
-        dateText.textContent = `Date: ${new Date(element.date).toLocaleString()}`
+        moodText.textContent = `Mood: ${element.value}`
+        dateText.textContent = `Date: ${new Date(element.label).toLocaleString()}`
         listItem.appendChild(moodText)
         listItem.appendChild(dateText)
 
@@ -79,7 +97,7 @@ customElements.define('saved-mood-data',
       })
     }
 
-    #renderNoMoodDataMessage () {
+    #renderNoMoodDataMessage() {
       this.#moodList.innerHTML = 'You do not have any moods saved.'
     }
 
