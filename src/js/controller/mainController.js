@@ -9,83 +9,55 @@ import '../components/log-form/index.js'
 import '../components/saved-mood-data/index.js'
 import { MoodLogService } from "../services/moodLogService.js";
 import { DiagramModule } from 'diagram-module';
+import { DiagramController } from './diagramController.js';
+import { UIManager } from './uiManager.js';
 
 export class MainController {
   #moodLogService
-  #moodLogForm
-  #savedMoodData
-  #savedDataButton
-  #logMoodButton
-  #diagram
+  #diagramController
+  #UIManager
 
   constructor () {
     this.#moodLogService = new MoodLogService()
-    this.#diagram = new DiagramModule('canvas-id')
+    this.#UIManager = new UIManager(document.querySelector('mood-log-form'), document.querySelector('saved-mood-data'))
+    this.#diagramController = new DiagramController(new DiagramModule('canvas-id'))
 
-    this.#moodLogForm = document.querySelector('mood-log-form')
-    this.#savedMoodData = document.querySelector('saved-mood-data')
+    this.#setupEventListeners()
+  }
 
-    this.#savedDataButton = document.getElementById('showSavedDataBtn')
-    this.#logMoodButton = document.getElementById('showMoodFormBtn')
-
-    this.#savedDataButton.addEventListener('click', this.displayMoods.bind(this))
-
-    this.#logMoodButton.addEventListener('click', () => {
-      this.#showMoodForm()
-      this.#hideMoodData()
+  #setupEventListeners() {
+    document.getElementById('showSavedDataBtn').addEventListener('click', this.displayMoods.bind(this));
+    document.getElementById('showMoodFormBtn').addEventListener('click', () => {
+      this.#UIManager.showMoodForm()
+      this.#UIManager.hideMoodData()
     })
 
-    this.#moodLogForm.addEventListener('createLog', (event) => {
-      const mood = event.detail.mood
-      this.createMoodLog(mood)
-    })
+    document.querySelector('mood-log-form').addEventListener('createLog', (event) => {
+      const mood = event.detail.mood;
+      this.createMoodLog(mood);
+    });
 
-    this.#savedMoodData.addEventListener('deleteAllMoodData', this.confirmAndDeleteAllMoodData.bind(this))
+    document.querySelector('saved-mood-data').addEventListener('deleteAllMoodData', this.confirmAndDeleteAllMoodData.bind(this));
   }
 
   createMoodLog (mood) {
     this.#moodLogService.saveMoodData(mood)
-    this.updateChart()
+    this.#diagramController.updateChart(this.getSavedData())
     this.displayMoods()
   }
 
   displayMoods() {
-    this.#showMoodData()
-    this.#hideMoodForm()
-    this.#savedMoodData.displayMoodData(this.#moodLogService.getMoodData())
-    this.updateChart()
+    this.#UIManager.showMoodData()
+    this.#UIManager.hideMoodForm()
+    this.#UIManager.displayMoodData(this.getSavedData())
+    this.#diagramController.updateChart(this.getSavedData())
   }
 
-  updateChart() {
-    this.#diagram.clear()
-    const moodData = this.#moodLogService.getMoodData();
-    const labels = {
-      yTitle: 'Mood Rating',
-      xTitle: 'Date',
-      maxValueForY: 10,
-      numOfYLabels: 10
-    }
-    this.#diagram.setSize(1200, 800)
-    this.#diagram.createLineChart(moodData, labels)
+  getSavedData () {
+    return this.#moodLogService.getMoodData()
   }
 
   confirmAndDeleteAllMoodData() {
     this.#moodLogService.clearMoodData()
-  }
-
-  #hideMoodData () {
-    this.#savedMoodData.style.display = 'none'
-  }
-
-  #hideMoodForm () {
-    this.#moodLogForm.style.display = 'none'
-  }
-
-  #showMoodData () {
-    this.#savedMoodData.style.display = 'block'
-  }
-
-  #showMoodForm () {
-    this.#moodLogForm.style.display = 'block'
   }
 }
