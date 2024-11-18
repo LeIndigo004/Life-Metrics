@@ -10,7 +10,7 @@ export class MoodLogService {
   #moodData
 
   constructor () {
-    this.#moodData = this.loadMoodData() || []
+    this.#moodData = this.#loadMoodData()
   }
 
   saveMoodData (mood) {
@@ -20,18 +20,15 @@ export class MoodLogService {
   }
 
   getMoodData () {
-    return [...this.#moodData]
+    return this.#loadMoodData()
   }
 
-  clearMoodData () {
-    this.#moodData = []
-    this.#setMoodData(this.#moodData)
-  }
-
-  loadMoodData () {
-    const moodData = JSON.parse(localStorage.getItem('moodData'))
-    console.log('Loaded mood data:', moodData)
-    return moodData
+  #loadMoodData () {
+    const moodData = localStorage.getItem('moodData')
+    if (!moodData) {
+      return []
+    }
+    return JSON.parse(moodData)
   }
 
   #setMoodData (moodData) {
@@ -43,5 +40,10 @@ export class MoodLogService {
       mood: mood, 
       date: new Date().toISOString()
     }
+  }
+
+  clearMoodData() {
+    localStorage.removeItem('moodData')
+    this.#moodData = []
   }
 }

@@ -1,3 +1,10 @@
+/**
+ * The saved mood web component module.
+ *
+ * @author Leia Lindberg <ll224np@student.lnu.se>
+ * @version 1.0.0
+ */
+
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
@@ -15,6 +22,7 @@ template.innerHTML = `
   <div>
     <h2>Saved Mood Data</h2>
     <ul id="moodList"></ul>
+    <button id="deleteDataBtn">Delete all data</button>
   </div>
 
 `
@@ -24,6 +32,7 @@ customElements.define('saved-mood-data',
   class extends HTMLElement {
 
     #moodList
+    #deleteDataBtn
 
     constructor() {
       super()
@@ -31,10 +40,28 @@ customElements.define('saved-mood-data',
       this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true))
 
       this.#moodList = this.shadowRoot.getElementById('moodList')
+      this.#deleteDataBtn = this.shadowRoot.getElementById('deleteDataBtn')
     }
 
-    renderMoodList(moodData) {
+    connectedCallback() {
+      this.#deleteDataBtn.addEventListener('click', this.confirmAndDeleteAllMoodData.bind(this))
+    }
+
+    disconnectedCallback() {
+      this.#deleteDataBtn.removeEventListener('click', this.confirmAndDeleteAllMoodData.bind(this))
+    }
+
+    displayMoodData(moodData) {
       this.#moodList.innerHTML = ''
+      if (moodData.length === 0) {
+        this.#renderNoMoodDataMessage()
+      } else {
+        this.#renderMoodList(moodData)
+      }
+    }
+
+    #renderMoodList(moodData) {
+
       moodData.forEach(element => {
         const listItem = document.createElement('li')
         const moodText = document.createElement('p')
@@ -49,7 +76,18 @@ customElements.define('saved-mood-data',
         listItem.appendChild(dateText)
 
         this.#moodList.appendChild(listItem)
-      });
+      })
+    }
+
+    #renderNoMoodDataMessage () {
+      this.#moodList.innerHTML = 'You do not have any moods saved.'
+    }
+
+    confirmAndDeleteAllMoodData() {
+      if (confirm("Are you sure you want to delete all saved data?")) {
+
+        this.dispatchEvent(new CustomEvent('deleteAllMoodData'))
+      }
     }
   }
 )
