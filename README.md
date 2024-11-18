@@ -1,6 +1,8 @@
 # **Life Metrics**  
 Life Metrics can help you with tracking your mood, which is shwon through a diagram.
 
+![Life Metrics](./images/Life%20Metrics.png)
+
 ## **Introduction**
 **Life Metrics** is a lightweight, user-friendly web app designed to help you monitor and analyze your mood and well-being over time. By logging your emotions daily, the app creates visualizations that allow you to identify patterns and make positive changes in your life.
 
