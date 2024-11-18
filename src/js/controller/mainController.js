@@ -10,7 +10,7 @@ import '../components/saved-mood-data/index.js'
 import { MoodLogService } from "../services/moodLogService.js";
 import { DiagramModule } from 'diagram-module';
 import { DiagramController } from './diagramController.js';
-import { UIManager } from './uiManager.js';
+import { UIManager } from './userInterfaceManager.js'
 
 export class MainController {
   #moodLogService
