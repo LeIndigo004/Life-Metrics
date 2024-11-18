@@ -1,7 +1,13 @@
+/**
+ * The ui manager module.
+ *
+ * @author Leia Lindberg <ll224np@student.lnu.se>
+ * @version 1.0.0
+ */
+
 export class UIManager {
   #moodLogForm
   #savedMoodData
-  #canvas
 
   constructor(moodLogForm, savedMoodData) {
     this.#moodLogForm = moodLogForm;

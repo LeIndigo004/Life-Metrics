@@ -1,11 +1,15 @@
+/**
+ * The diagram controller module.
+ *
+ * @author Leia Lindberg <ll224np@student.lnu.se>
+ * @version 1.0.0
+ */
 
 export class DiagramController {
   #diagramModule
-  #moodLogService
 
-  constructor(diagramModule, moodLogService) {
+  constructor(diagramModule) {
     this.#diagramModule = diagramModule;
-    this.#moodLogService = moodLogService;
   }
 
   updateChart(moodData) {
