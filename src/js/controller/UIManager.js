@@ -1,6 +1,7 @@
 export class UIManager {
   #moodLogForm
   #savedMoodData
+  #canvas
 
   constructor(moodLogForm, savedMoodData) {
     this.#moodLogForm = moodLogForm;

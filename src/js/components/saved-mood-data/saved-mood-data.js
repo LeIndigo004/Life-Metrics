@@ -26,14 +26,14 @@ template.innerHTML = `
 
     #deleteDataBtn {
       padding: 10px 20px;
-  margin: 10px;
-  background-color: red;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+      margin: 10px;
+      background-color: red;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+     }
     }
 </style>
 

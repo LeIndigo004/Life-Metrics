@@ -10,8 +10,8 @@ template.innerHTML = `
 <style>
   #container {
   display: flex;
-  justify-content: center; /* Centrerar horisontellt */
-  align-items: center; /* Centrerar vertikalt om höjd är satt */
+  justify-content: center;
+  align-items: center;
 }
 
   h2 {
@@ -37,12 +37,12 @@ template.innerHTML = `
   }
 
 </style>
-<h2>How are you feeling today?</h2>
-<form id="logForm">
-<div id="container">
-    <input type="number" id="mood" min="1" max="10" placeholder="Rate your mood (1-10)" required>
+  <h2>How are you feeling today?</h2>
+   <form id="logForm">
+    <div id="container">
+      <input type="number" id="mood" min="1" max="10" placeholder="Rate your mood (1-10)" required>
     </div>
-</form>
+   </form>
 
 `
 
@@ -63,10 +63,6 @@ customElements.define('mood-log-form',
       this.#form = this.shadowRoot.getElementById('logForm')
     }
 
-    getUserMoodInput() {
-      return this.#validateMoodNumber(parseInt(this.#moodInput.value, 10))
-    }
-
     connectedCallback() {
       this.#form.addEventListener('keydown', this.#handleSubmitEvent.bind(this))
     }
@@ -75,7 +71,11 @@ customElements.define('mood-log-form',
       this.#form.removeEventListener('keydown', this.#handleSubmitEvent.bind(this))
     }
 
-    #handleSubmitEvent (event) {
+    getUserMoodInput() {
+      return this.#validateMoodNumber(parseInt(this.#moodInput.value, 10))
+    }
+
+    #handleSubmitEvent(event) {
       try {
         if (event.key === 'Enter') {
           event.preventDefault()
@@ -87,14 +87,14 @@ customElements.define('mood-log-form',
       }
     }
 
-    #validateMoodNumber (mood) {
+    #validateMoodNumber(mood) {
       if (this.#isMoodNotValidNumber(mood)) {
-        throw new Error ('Mood must be a number between 1 and 10.')
+        throw new Error('Mood must be a number between 1 and 10.')
       }
       return mood
     }
 
-    #isMoodNotValidNumber (mood) {
+    #isMoodNotValidNumber(mood) {
       return isNaN(mood) || mood < 1 || mood > 10
     }
   }

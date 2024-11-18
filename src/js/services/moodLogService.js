@@ -14,12 +14,15 @@ export class MoodLogService {
   }
 
   saveMoodData (mood) {
-    const newMoodData = this.#createMoodData(mood)
-    this.#moodData.push(newMoodData)
+    this.#moodData.push(this.#createMoodData(mood))
+    this.#trimMoodData()
+    this.#setMoodData(this.#moodData)
+  }
+
+  #trimMoodData() {
     if (this.#moodData.length > 7) {
       this.#moodData.shift()
     }
-    this.#setMoodData(this.#moodData)
   }
 
   getMoodData () {
@@ -28,10 +31,14 @@ export class MoodLogService {
 
   #loadMoodData () {
     const moodData = localStorage.getItem('moodData')
+    this.#checkIfDataExist(moodData)
+    return JSON.parse(moodData)
+  }
+
+  #checkIfDataExist(moodData) {
     if (!moodData) {
       return []
     }
-    return JSON.parse(moodData)
   }
 
   #setMoodData (moodData) {
@@ -39,12 +46,14 @@ export class MoodLogService {
   }
 
   #createMoodData (mood) {
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0] // Ger bara datumet
     return {
-      label: formattedDate,
+      label: this.#formatDate(),
       value: mood
     }
+  }
+
+  #formatDate () {
+    return new Date().toISOString().split('T')[0]
   }
 
   clearMoodData() {
