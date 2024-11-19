@@ -8,10 +8,12 @@
 export class UserInterfaceManager {
   #moodLogForm
   #savedMoodData
+  #canvas
 
-  constructor(moodLogForm, savedMoodData) {
+  constructor(moodLogForm, savedMoodData, canvas) {
     this.#moodLogForm = moodLogForm;
     this.#savedMoodData = savedMoodData;
+    this.#canvas = canvas;
   }
 
   showMoodForm() {
@@ -32,5 +34,13 @@ export class UserInterfaceManager {
 
   displayMoodData(moodData) {
     this.#savedMoodData.displayMoodData(moodData);
+  }
+
+  hideCanvas() {
+    this.#canvas.style.display = 'none'
+  }
+
+  showCanvas() {
+    this.#canvas.style.display = 'block'
   }
 }

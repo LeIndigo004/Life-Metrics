@@ -23,7 +23,6 @@ template.innerHTML = `
   input {
     display: block;
     padding: 15px;
-    padding-right: 50px;
     border-radius: 10px;
     font-family:inherit;
     font-size: 16px;
@@ -37,10 +36,10 @@ template.innerHTML = `
   }
 
 </style>
-  <h2>How are you feeling today?</h2>
+  <h2>How are you feeling today? (Rate from 1-10)</h2>
    <form id="logForm">
     <div id="container">
-      <input type="number" id="mood" min="1" max="10" placeholder="Rate your mood (1-10)" required>
+      <input type="number" id="mood" min="1" max="10" required>
     </div>
    </form>
 

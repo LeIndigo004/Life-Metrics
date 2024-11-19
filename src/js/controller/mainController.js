@@ -16,10 +16,13 @@ export class MainController {
   #moodLogService
   #diagramController
   #UIManager
+  #canvas
 
   constructor () {
+    this.#canvas = document.getElementById('canvas-id')
+
     this.#moodLogService = new MoodLogService()
-    this.#UIManager = new UserInterfaceManager(document.querySelector('mood-log-form'), document.querySelector('saved-mood-data'))
+    this.#UIManager = new UserInterfaceManager(document.querySelector('mood-log-form'), document.querySelector('saved-mood-data'), this.#canvas)
     this.#diagramController = new DiagramController(new DiagramModule('canvas-id'))
 
     this.#setupEventListeners()
@@ -28,8 +31,7 @@ export class MainController {
   #setupEventListeners() {
     document.getElementById('showSavedDataBtn').addEventListener('click', this.displayMoods.bind(this));
     document.getElementById('showMoodFormBtn').addEventListener('click', () => {
-      this.#UIManager.showMoodForm()
-      this.#UIManager.hideMoodData()
+      this.#displayMoodForm()
     })
 
     document.querySelector('mood-log-form').addEventListener('createLog', (event) => {
@@ -42,15 +44,12 @@ export class MainController {
 
   createMoodLog (mood) {
     this.#moodLogService.saveMoodData(mood)
-    this.#diagramController.updateChart(this.getSavedData())
     this.displayMoods()
   }
 
   displayMoods() {
-    this.#UIManager.showMoodData()
-    this.#UIManager.hideMoodForm()
-    this.#UIManager.displayMoodData(this.getSavedData())
     this.#diagramController.updateChart(this.getSavedData())
+    this.#displayUserSavedMood()
   }
 
   getSavedData () {
@@ -59,5 +58,19 @@ export class MainController {
 
   confirmAndDeleteAllMoodData() {
     this.#moodLogService.clearMoodData()
+    this.#displayMoodForm()
+  }
+
+  #displayMoodForm () {
+    this.#UIManager.hideMoodData()
+    this.#UIManager.showMoodForm()
+    this.#UIManager.hideCanvas()
+  }
+
+  #displayUserSavedMood () {
+    this.#UIManager.displayMoodData(this.getSavedData())
+    this.#UIManager.showMoodData()
+    this.#UIManager.showCanvas()
+    this.#UIManager.hideMoodForm()
   }
 }
