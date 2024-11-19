@@ -20,11 +20,11 @@ The application is deployed on netlify: [Life Metrics](https://life-metrics.netl
 
 ### **Usage**
 
-1. Use the **Log a Mood** form to enter your daily mood rating and notes.  
+1. Use the **Log a Mood** form to enter your daily mood rating.  
 2. Switch to the **Saved Data** view to see logged moods and trends.  
 3. Analyze your mood trends using the interactive chart.  
 4. Clear all data if you want to start fresh.
-
+**OBS.** 'You can technically log data more than ones a day (which is done during testing), but the idea is that you can rate your mood from 1 to 10 ones a day, and see statistically how you feel over a longer time.'
 ---
 
 ## **User Guide**
